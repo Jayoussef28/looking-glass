@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import ProfileForm from '../components/forms/ProfileForm';
 
 function Home() {
   return (
@@ -11,10 +11,7 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <p>Click the button below to create a profile!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn">
-        Create Profile
-      </Button>
+      <ProfileForm />
 
     </div>
   );
