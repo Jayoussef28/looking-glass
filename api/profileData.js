@@ -27,6 +27,30 @@ const createProfile = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteProfile = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/profile/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
+const getSingleProfile = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/profile/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const updateProfile = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/profile/${payload.firebaseKey}.json`, {
     method: 'PATCH',
@@ -44,4 +68,6 @@ export {
   getProfile,
   createProfile,
   updateProfile,
+  deleteProfile,
+  getSingleProfile,
 };
