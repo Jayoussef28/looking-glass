@@ -22,15 +22,12 @@ function ProfilePage() {
   }, []);
 
   return (
-    <div className="text-center my-4">
-
-      <div className="d-flex flex-wrap">
-        {profile.map((profiles) => (
-          <ProfileCard key={profile.firebaseKey} profileObj={profiles} onUpdate={getAllTheProfiles} />
-        ))}
-      </div>
-
+    <div className="d-flex flex-wrap">
+      {profile.map((profiles) => (
+        <ProfileCard key={profile.firebaseKey} profileObj={profiles} onUpdate={getAllTheProfiles} />
+      ))}
     </div>
+
   );
 }
 
