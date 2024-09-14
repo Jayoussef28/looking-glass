@@ -64,10 +64,22 @@ const updateProject = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getProgress = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/progress.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 export {
   getProjects,
   createProject,
   deleteProject,
   getSingleProject,
   updateProject,
+  getProgress,
 };

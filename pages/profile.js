@@ -6,7 +6,7 @@ import ProfileCard from '../components/cards/ProfileCard';
 
 function ProfilePage() {
   // TODO: Set a state for Profile
-  const [profile, setProfile] = useState([]);
+  const [profiles, setProfile] = useState([]);
 
   // TODO: Get user ID using useAuth Hook
   const { user } = useAuth();
@@ -23,8 +23,8 @@ function ProfilePage() {
 
   return (
     <div className="d-flex flex-wrap">
-      {profile.map((profiles) => (
-        <ProfileCard key={profile.firebaseKey} profileObj={profiles} onUpdate={getAllTheProfiles} />
+      {profiles.map((profile) => (
+        <ProfileCard key={profile.firebaseKey} profileObj={profile} onUpdate={getAllTheProfiles} />
       ))}
     </div>
 

@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createProject, updateProject, getProjects } from '../../api/projectData';
+import { createProject, updateProject, getProgress } from '../../api/projectData';
 
 const initialState = {
   name: '',
   image: '',
-  progress_id: '',
   notes: '',
 };
 
@@ -20,7 +19,8 @@ function ProjectForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    getProjects(user.uid).then(setProgress);
+    getProgress(user.uid).then(setProgress);
+
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -35,7 +35,7 @@ function ProjectForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateProject(formInput).then(() => router.push(`/project/${obj.firebaseKey}`));
+      updateProject(formInput).then(() => router.push('/projects'));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createProject(payload).then(({ name }) => {
@@ -95,7 +95,7 @@ function ProjectForm({ obj }) {
                 key={progress.firebaseKey}
                 value={progress.firebaseKey}
               >
-                {progress.progress_id}
+                {progress.name}
               </option>
             ))
           }
