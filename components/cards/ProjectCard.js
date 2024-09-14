@@ -37,6 +37,7 @@ ProjectCard.propTypes = {
   projectObj: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
+    project_id: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
