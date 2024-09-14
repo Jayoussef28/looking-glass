@@ -6,7 +6,6 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
 import Button from 'react-bootstrap/Button';
-import Link from 'next/link';
 import { deleteProfile } from '../../api/profileData';
 
 function ProfileCard({ profileObj, onUpdate }) {
@@ -33,9 +32,6 @@ function ProfileCard({ profileObj, onUpdate }) {
         {profileObj.email}
         <p>{profileObj.bio}</p>
         <hr />
-        <Link href={`/profile/edit/${profileObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
         <Button variant="danger" onClick={deleteThisProfile} className="m-2">
           DELETE
         </Button>
