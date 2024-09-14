@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createProject, updateProject } from '../../api/projectData';
+import { createProject, updateProject, getProjects } from '../../api/projectData';
 
 const initialState = {
   name: '',
@@ -15,10 +15,12 @@ const initialState = {
 
 function ProjectForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [progresses, setProgress] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
+    getProjects(user.uid).then(setProgress);
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -39,7 +41,7 @@ function ProjectForm({ obj }) {
       createProject(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateProject(patchPayload).then(() => {
-          router.push('/');
+          router.push('/projects');
         });
       });
     }
@@ -86,11 +88,17 @@ function ProjectForm({ obj }) {
           value={formInput.progress_id}
           required
         >
-          <option value="">Select Project Progress</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Complete">Complete</option>
-          <option value="Future Project">Future Project</option>
-
+          <option value="">Select Progress</option>
+          {
+            progresses.map((progress) => (
+              <option
+                key={progress.firebaseKey}
+                value={progress.firebaseKey}
+              >
+                {progress.progress_id}
+              </option>
+            ))
+          }
         </Form.Select>
       </Form.Group>
 
