@@ -93,7 +93,7 @@ function ProjectForm({ obj }) {
             progresses.map((progress) => (
               <option
                 key={progress.firebaseKey}
-                value={progress.firebaseKey}
+                value={progress.name}
               >
                 {progress.name}
               </option>
