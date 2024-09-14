@@ -6,8 +6,6 @@ import Link from 'next/link';
 import { deleteProject } from '../../api/projectData';
 
 function ProjectCard({ projectObj, onUpdate }) {
-  // FOR DELETE, WE NEED TO REMOVE THE PROJECT AND HAVE THE VIEW RERENDER,
-  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
   const deleteThisProject = () => {
     if (window.confirm(`Delete ${projectObj.name}?`)) {
       deleteProject(projectObj.firebaseKey).then(() => onUpdate());
@@ -39,8 +37,6 @@ ProjectCard.propTypes = {
   projectObj: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
-    sale: PropTypes.bool,
-    price: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
