@@ -11,44 +11,48 @@ const initialState = {
   image: '',
   notes: '',
 };
-
-function ProjectForm({ obj }) {
+// function that sets empty array or initial state for form inputs to go.
+function ProjectForm({ obj }) { // Project from component
   const [formInput, setFormInput] = useState(initialState);
+  // sets form at initial state
   const [progresses, setProgress] = useState([]);
+  // sets progress state to an empty array
   const router = useRouter();
+  // provides routing functions
   const { user } = useAuth();
 
   useEffect(() => {
     getProgress(user.uid).then(setProgress);
-
+    // hook task used to fetch progress data and update the state with result
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormInput((prevState) => ({
+  // updates the form input if obj.firebaseKey exists
+  const handleChange = (e) => { // function designed to update form input state whenever a form value changes.
+    const { name, value } = e.target; // destructures name and value of input feild from event object
+    setFormInput((prevState) => ({ // updates form input state and updates specific field with new value
       ...prevState,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (obj.firebaseKey) {
+    // arrow function designed to handle form submissions with event as parameter
+    e.preventDefault(); // stops form from preforming default submission
+    if (obj.firebaseKey) { // if present updates existing
       updateProject(formInput).then(() => router.push('/projects'));
-    } else {
-      const payload = { ...formInput, uid: user.uid };
-      createProject(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateProject(patchPayload).then(() => {
-          router.push('/projects');
+    } else { // if not present creates new project
+      const payload = { ...formInput, uid: user.uid }; // creates new object payload that adds the uid of user and then uses to creates new project
+      createProject(payload).then(({ name }) => { // calls create project function then destructures returned object to get name property (unique identifier in new project in firebase)
+        const patchPayload = { firebaseKey: name }; // creates patch payload object that contains firebaseKey with new projects name.
+        updateProject(patchPayload).then(() => { // calls update project function which updates new project with unique firebase key.
+          router.push('/projects'); // routes to projects page
         });
       });
     }
   };
 
-  return (
-    <Form onSubmit={handleSubmit}>
+  return ( // defines components rendered output
+    <Form onSubmit={handleSubmit}> {/* renders form component */}
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Project</h2>
 
       {/* NAME INPUT  */}
@@ -82,18 +86,18 @@ function ProjectForm({ obj }) {
       <Form.Group controlId="floatingSelect">
         <Form.Label>Progress</Form.Label>
         <Form.Select
-          name="progress_id"
-          onChange={handleChange}
+          name="progress_id" // sets name attribute whish is used in handleChange to identify imput field //
+          onChange={handleChange} // attach handle change function
           className="mb-3 height50"
-          value={formInput.progress_id}
+          value={formInput.progress_id} // sets current value of input feild based on form input sate //
           required
         >
           <option value="">Select Progress</option>
           {
-            progresses.map((progress) => (
+            progresses.map((progress) => ( // maps over array
               <option
-                key={progress.firebaseKey}
-                value={progress.name}
+                key={progress.firebaseKey} // sets unique key for each option
+                value={progress.firebaseKey}
               >
                 {progress.name}
               </option>
@@ -123,7 +127,7 @@ function ProjectForm({ obj }) {
 }
 
 ProjectForm.propTypes = {
-  obj: PropTypes.shape({
+  obj: PropTypes.shape({ // defines the structure of the prop
     name: PropTypes.string,
     image: PropTypes.string,
     progress_id: PropTypes.string,
@@ -132,7 +136,7 @@ ProjectForm.propTypes = {
   }),
 };
 
-ProjectForm.defaultProps = {
+ProjectForm.defaultProps = { // provides default values for properties
   obj: initialState,
 };
 
