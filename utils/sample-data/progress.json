@@ -1,14 +1,14 @@
 {
   "-MiBwAF5wOY00AYJm7cR": {
      "firebaseKey" : "-MiBwAF5wOY00AYJm7cR",
-     "name" : "Complete"
+     "progress_name" : "Complete"
   },
   "-MiBvf3bIyooE6x4nLLB": {
       "firebaseKey": "-MiBvf3bIyooE6x4nLLB",
-      "name" : "In Progress"
+      "progress_name" : "In Progress"
    },
    "-MiBw4tCvNZd23yTVDQw": {
       "firebaseKey": "-MiBw4tCvNZd23yTVDQw",
-      "name": "Future Project"
+      "progress_name": "Future Project"
    }
 }

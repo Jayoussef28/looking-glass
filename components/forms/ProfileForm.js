@@ -100,7 +100,7 @@ function ProfileForm({ obj }) {
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Profile</Button>
+      <Button type="submit" className="copy-btn">{obj.firebaseKey ? 'Update' : 'Create'} Profile</Button>
     </Form>
   );
 }

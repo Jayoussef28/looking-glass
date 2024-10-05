@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'react-bootstrap/Image';
 // import Button from 'react-bootstrap/Button';
-import { getSingleProject } from '../../api/projectData';
+import { viewProjectDetails } from '../../api/projectData';
 
 export default function ViewProject() {
   const [projectDetails, setProjectDetails] = useState({});
@@ -10,7 +10,7 @@ export default function ViewProject() {
   const { firebaseKey } = router.query;
 
   useEffect(() => {
-    getSingleProject(firebaseKey).then(setProjectDetails);
+    viewProjectDetails(firebaseKey).then(setProjectDetails);
   }, [firebaseKey]);
 
   return (
@@ -22,7 +22,7 @@ export default function ViewProject() {
         <h5>
           {projectDetails.name}
         </h5>
-        <p> {projectDetails.progress_id}
+        <p>{projectDetails.progress_id}
         </p>
         <p>{projectDetails.notes}</p>
         <hr />

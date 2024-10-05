@@ -9,6 +9,7 @@ import { createProject, updateProject, getProgress } from '../../api/projectData
 const initialState = {
   name: '',
   image: '',
+  progress_name: '',
   notes: '',
 };
 // function that sets empty array or initial state for form inputs to go.
@@ -96,10 +97,10 @@ function ProjectForm({ obj }) { // Project from component
           {
             progresses.map((progress) => ( // maps over array
               <option
-                key={progress.firebaseKey} // sets unique key for each option
-                value={progress.firebaseKey}
+                key={progress.progress_id} // sets unique key for each option
+                value={progress.progress_id}
               >
-                {progress.name}
+                {progress.progress_name}
               </option>
             ))
           }
@@ -121,7 +122,7 @@ function ProjectForm({ obj }) { // Project from component
       </Form.Group>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Project</Button>
+      <Button type="submit" className="copy-btn">{obj.firebaseKey ? 'Update' : 'Create'} Project</Button>
     </Form>
   );
 }
@@ -130,7 +131,7 @@ ProjectForm.propTypes = {
   obj: PropTypes.shape({ // defines the structure of the prop
     name: PropTypes.string,
     image: PropTypes.string,
-    progress_id: PropTypes.string,
+    progress_name: PropTypes.string,
     notes: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
