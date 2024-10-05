@@ -22,7 +22,7 @@ function ProjectsPage() {
   return (
     <div className="d-flex flex-wrap">
       {projects.map((project) => (
-        <ProjectCard key={project.firebaseKey} projectObj={project} onUpdate={getAllTheProjects} />
+        <ProjectCard key={project.progress_id} projectObj={project} onUpdate={getAllTheProjects} />
       ))}
     </div>
 

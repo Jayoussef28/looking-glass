@@ -75,6 +75,13 @@ const getProgress = () => new Promise((resolve, reject) => {
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
+
+const viewProjectDetails = (projectsFirebaseKey) => new Promise((resolve, reject) => {
+  Promise.all([getSingleProject(projectsFirebaseKey), getProjects(projectsFirebaseKey)])
+    .then(([progressObject, progressProjectArray]) => {
+      resolve({ ...progressObject, project: progressProjectArray });
+    }).catch((error) => reject(error));
+});
 export {
   getProjects,
   createProject,
@@ -82,4 +89,5 @@ export {
   getSingleProject,
   updateProject,
   getProgress,
+  viewProjectDetails,
 };

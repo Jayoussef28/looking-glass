@@ -26,7 +26,7 @@ export default function NavBar() {
             <Link passHref href="/projects/new">
               <Nav.Link>Create Project</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button variant="danger" className="copy-btn" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
